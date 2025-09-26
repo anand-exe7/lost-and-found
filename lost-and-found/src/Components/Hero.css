@@ -1,0 +1,68 @@
+:root {
+  --text-primary: #000000;
+  --accent: #007bff;
+}
+
+[data-theme="dark"] {
+  --text-primary: #ffffff;
+  --accent: #4dabf7;
+}
+
+
+.hero-content{
+    padding: 40px;
+    margin: 170px;
+}
+
+
+
+.hero-content p{
+    font-size: 1.3rem;
+    max-width: 690px;
+    font-weight: 400;
+}
+.hero {
+  font-size: 3.5rem;
+  font-weight: 800;
+  max-width: 600px;
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  
+  /* Always show text first */
+  color: var(--text-primary);
+  
+  /* Then apply gradient if supported */
+  background: linear-gradient(135deg, var(--text-primary) 0%, var(--accent) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+/* Only make text transparent if gradient is supported */
+@supports (-webkit-background-clip: text) {
+  .hero {
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+}
+
+
+.btn1{
+    border: 30px;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 25px;
+    background-color: #007bff;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.btn2{
+    border: 30px;
+    border-radius: 25px;
+    padding: 20px;
+    margin: 25px;
+    background-color: #e6ebf0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+

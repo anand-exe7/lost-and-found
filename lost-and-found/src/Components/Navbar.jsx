@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <div className='navbar'>
         <div className='nav-left'>
-            <h2>Campus lost and found</h2>
+            <h2>Lost and Found</h2>
             <img src=''></img>
         </div>
 
