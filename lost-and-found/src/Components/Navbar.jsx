@@ -1,4 +1,5 @@
 import React from 'react'
+import './Navbar.css'
 
 const Navbar = () => {
   return (
@@ -7,6 +8,16 @@ const Navbar = () => {
         <div className='nav-left'>
             <h2>Campus lost and found</h2>
             <img src=''></img>
+        </div>
+
+        <div className='nav-right'>
+      
+            <a className='gap'>Home</a>
+            <a className='gap'> About Us</a>
+            <a className='login'>Login</a>
+            <a className='signup'>Sign Up</a>
+         
+          
         </div>
       </div>
     </div>
