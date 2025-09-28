@@ -156,14 +156,66 @@ const Hero = () => {
         </div>
     </section>
 
+<h2>Get In Touch</h2>
+    <div className='contact-us'>
+        <div className='contact'>
+         <div className='contact-sec'>
+            <h3>Need Help or Have Questions?</h3>
+            <p>We're here to help make your campus experience better. Reach out to us for support, partnerships, or just to share your feedback.</p>
 
-    
-          
+            <div className='box1'>
+                <img src={phone}></img>
+                <div className='box-img'>
+                    <h2>Email Support</h2>
+                    <p>support@srmrmp.edu</p>
+                    <p>Response within 24 hours</p>
+                </div>
+                
+            </div>
+
+             <div className='box2'>
+                <div className='box2-img'>
+                    <img src=''></img>
+                <h2>Lost and Found</h2>
+                <p>Admin Building, Room 101</p>
+                <p> Walk-in hours: Mon-Fri, 10AM-4PM</p>
+                </div>
+                
+            </div>
+        </div>
+
+            <div class="contact-form-container">
+                    <form class="contact-form">
+                        <h3>Send us a Message</h3>
+                        <div class="form-group">
+                            <input type="text" placeholder="Your Name" required></input>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="Your College Email" required></input>
+                        </div>
+                        <div class="form-group">
+                            <select required>
+                                <option value="">Select Topic</option>
+                                <option value="support">Technical Support</option>
+                                <option value="partnership">College Partnership</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea rows="5" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">Send Message</button>
+                    </form>
+                </div>
+                
+        </div>
+        
+    </div>
 
 
-
-
-      
+     
+           
         
       </div>
 
