@@ -75,7 +75,7 @@
   align-items: flex-end;
   gap: 20px;
   transition: 0.4s;
-
+  margin-top: -360px;
 }
 
 
@@ -95,7 +95,9 @@
   background-color: #e6ebf0;
   width: 140px;
   height: 60px;
+  
 }
+
 
 .img2{
   width: 50px;
@@ -142,7 +144,7 @@
   background-color: #e6ebf0;
   width: 140px;
   height: 60px;
-}
+}   
   
 .img-1 {
   animation: float-updown 3s ease-in-out infinite;
@@ -206,4 +208,74 @@
 /* Motion safety */
 @media (prefers-reduced-motion: reduce) {
   .img-4 { animation: none; transform: none; }
+}
+
+.works{
+  display: wrap;
+  flex-wrap: wrap;
+  padding: 20px;
+  margin: 60px;
+ 
+}
+
+.workp{
+  font-size: 2.4rem;
+  font-weight: 600;
+  align-items: center;
+  text-align: center;
+  padding: 60px;
+}
+
+.cards{
+  display: flex;
+
+}
+
+.cards h3{
+  font-size: 1.5rem;
+
+}
+
+.cards p{
+  font-size: 1.1rem;
+  color: #000000;
+  padding: 10px;
+}
+
+.card1{
+  border: 20px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f9fa;
+  color: #4dabf7;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  width: 500px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;}
+
+.card2{
+  border: 20px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f9fa;
+  color: #4dabf7;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  width: 500px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.card3{
+  border: 20px;
+  padding: 20px;
+  margin: 20px;
+  background-color: #f8f9fa;
+  color: #4dabf7;
+  align-items: center;
+  text-align: center;
+  border-radius: 20px;
+  width: 500px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
