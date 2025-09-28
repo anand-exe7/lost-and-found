@@ -42,39 +42,30 @@
 }
 
 .gap{
-   width: 80px;
+   width: 100px;
 }
 
-.nav-right .login{
+.login{
     color: black;
     border-radius: 20px;
     display: flex;
    justify-content: center;
     align-items: center;
     width: 70px;
-
     
 }
 
-.nav-right .signup{
-   
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 90px;
+.login a{
+    text-decoration: none;
+    color: black;
 }
 
-.nav-right .signup:hover{
-    background-color: #f3eeee;
-    transition: 0.3s;
-    transform: scaleY(30px);
-     color:  #007bff;
-}
-.nav-right .login:hover{
+
+
+.login:hover{
     color:  #007bff;
     background-color: #f3eeee;
     transition: 0.3s;
-    transform: scale(20px);
+    transform: scale(30px);
     
 }

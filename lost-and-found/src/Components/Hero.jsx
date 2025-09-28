@@ -78,6 +78,14 @@ const Hero = () => {
           <h3>Resolve & Close Case</h3>
            <p>Once an item is successfully returned, the post can be marked as resolved. This helps avoid duplicate claims and keeps the platform organized.</p>
         </div>
+
+
+        <div className='student'>
+          <div className='review'>
+            <h3>  Create An Account</h3>
+            <p>Sign up with your college email address for instant verification. Your student ID ensures you're connected only with verified campus community members.</p>
+          </div>
+        </div>
         
       </div>
 
