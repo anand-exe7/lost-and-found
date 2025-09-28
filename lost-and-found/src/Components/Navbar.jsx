@@ -1,6 +1,8 @@
 import React from 'react'
 import './Navbar.css'
-import { Link } from 'react-router-dom'
+
+import { Link } from 'react-scroll'
+import Hero from './Hero'
 
 const Navbar = () => {
   return (
@@ -14,7 +16,7 @@ const Navbar = () => {
         <div className='nav-right'>
       
             <a className='gap'>Home</a>
-            <a className='gap'> About Us</a>
+            <Link to="about" smooth={true} duration={500}>About Us</Link>
             <a className='gap'> Contact Us</a>
             <div className='login'>
                <Link to="/auth">Login</Link>

@@ -499,30 +499,45 @@
 
         .contact-us h2{
           text-align: center;
+          font-size: 2rem;
         }
 
         .contact-sec{
           display: flex;
           flex-direction: column;
           justify-content: center;
-          align-items: center;
+          gap: 40px;
+          
           
         }
+
+        .contact-sec p{
+          width:580px;
+          
+        }
+
+        .contact-sec h3{
+          color: #007bff;
+        } 
 
         .contact{
           display: flex;
           flex-direction: row;
+          padding: 80px;
+          gap: 90px;
+          
+
         }
 
         .box1{
           display: flex;
           flex-direction: row;
-          justify-content: flex-start;
           align-items: flex-start;
-          border: 30px;
-          background-color: #e0e0e0;
+          border: 10px;
+          background-color: #f8f9fa;
           border-radius: 20px;
-          width: 600px;
+          width: 900px;
+      
           
 
         }
@@ -540,4 +555,149 @@
         .box1 p{
           font-size: 1.2rem;
           color: #007bff;
+          padding-top: 1px;
+          margin-top: 3px;
         }
+
+
+         .box2{
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+          border: 10px;
+          background-color: #f8f9fa;
+          border-radius: 20px;
+          width: 900px;
+          padding: 0;
+          
+          
+
+        }
+
+        .box2 img{
+          width: 80px;
+          padding: 30px;
+          margin: 20px;
+        }
+
+        .box2 h2{
+          font-size: 1.4rem;
+        
+        }
+
+        .box2 p{
+          font-size: 1.2rem;
+          color: #007bff;
+          padding-top: 1px;
+          margin-top: 3px;
+        }
+
+        .footer {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-logo .logo {
+            color: var(--bg-primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .footer-logo p {
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-section h4 {
+            color: var(--bg-primary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+            padding-left: 5px;
+        }
+
+        .footer-divider {
+            height: 1px;
+            background: rgba(255,255,255,0.2);
+            margin: 2rem 0;
+        }
+
+        .footer-bottom-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom-content p {
+            color: rgba(255,255,255,0.8);
+        }
+
+        .footer-badges {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+
+
+
+
+      

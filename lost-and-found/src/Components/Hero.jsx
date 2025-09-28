@@ -43,6 +43,8 @@ const Hero = () => {
       </div>
     </div>
 
+   <section id='about'>
+
     <div className='works'>
        <p className='workp'>How It Works</p>
       <div className='cards'>
@@ -80,9 +82,13 @@ const Hero = () => {
           <h3>Resolve & Close Case</h3>
            <p>Once an item is successfully returned, the post can be marked as resolved. This helps avoid duplicate claims and keeps the platform organized.</p>
         </div>
+        </div>
+
+      </div>
+      </section>
 
 
-        <section class="reviews" id="about">
+        <section class="reviews" >
         <div class="reviews-container">
             <h2 class="section-title">What Students Say</h2>
             <div class="reviews-grid">
@@ -156,8 +162,11 @@ const Hero = () => {
         </div>
     </section>
 
-<h2>Get In Touch</h2>
-    <div className='contact-us'>
+    
+       
+    
+    <div className='contact-us'> 
+        <h2>Get In Touch</h2>
         <div className='contact'>
          <div className='contact-sec'>
             <h3>Need Help or Have Questions?</h3>
@@ -174,11 +183,11 @@ const Hero = () => {
             </div>
 
              <div className='box2'>
+                <img src=''></img>
                 <div className='box2-img'>
-                    <img src=''></img>
-                <h2>Lost and Found</h2>
-                <p>Admin Building, Room 101</p>
-                <p> Walk-in hours: Mon-Fri, 10AM-4PM</p>
+                    <h2>Lost and Found</h2>
+                    <p>Admin Building, Room 101</p>
+                    <p> Walk-in hours: Mon-Fri, 10AM-4PM</p>
                 </div>
                 
             </div>
@@ -214,13 +223,44 @@ const Hero = () => {
     </div>
 
 
+     <footer class="footer">
+        <div class="footer-container">
+            <div class="footer-content">
+     <div class="footer-section">
+                    <div class="footer-logo">
+                        <span class="logo">CampusFind</span>
+                        <p>Making campus life easier, one found item at a time. Connect, recover, and build stronger college communities.</p>
+                        <div class="social-links">
+                            <a href="#" class="social-link">📘</a>
+                            <a href="#" class="social-link">📷</a>
+                            <a href="#" class="social-link">🐦</a>
+                            <a href="#" class="social-link">💼</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">How It Works</a></li>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#">Mobile App</a></li>
+                        <li><a href="#">Campus Partners</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
      
            
         
       </div>
 
-      </div>
-  </div>
+      
+  
   )
 }
 
