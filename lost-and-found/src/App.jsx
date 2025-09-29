@@ -8,6 +8,7 @@ import { Routes , Route } from 'react-router-dom'
 import Home from './Pages/Home'
 import AuthForm from './Pages/AuthForm'
 import Dashboard from './Pages/Dashboard'
+import ItemDetail from './Pages/ItemDetail'
 
 
 function App() {
@@ -19,7 +20,8 @@ function App() {
     <Routes>
       <Route path = '/' element = {<Home/>}></Route>
       <Route path = '/auth' element = {<AuthForm />}></Route>
-      <Route path='/Dashboard' element = {<Dashboard />}></Route>
+      <Route path='/dashboard' element = {<Dashboard />}></Route>
+      <Route path="/item/:id" element={<ItemDetail />} />
     </Routes>
      
     </>

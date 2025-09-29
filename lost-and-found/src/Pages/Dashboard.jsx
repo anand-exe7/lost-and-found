@@ -1,103 +1,198 @@
-// Dashboard.jsx
-import React, { useState } from "react";
-import "./Dashboard.css";
-import { Button } from "@shadcn/ui";
+  import React, { useState, useEffect } from 'react';
+  import { useNavigate } from 'react-router-dom';
+  import Sidebar from '../Components/Dashboard/Sidebar';
+  import ItemCard from '../Components/Dashboard/ItemCard';
+  import ReportModal from '../Components/Dashboard/ReportModal';
+  import './Dashboard.css';
 
-const Dashboard = () => {
-  const [activeTab, setActiveTab] = useState("Lost");
+  const Dashboard = () => {
+    const [activeTab, setActiveTab] = useState('lost');
+    const [searchQuery, setSearchQuery] = useState('');
+    const [showModal, setShowModal] = useState(false);
+    const [filteredItems, setFilteredItems] = useState([]);
+    const navigate = useNavigate();
 
-  const items = [
-    {
-      id: 1,
-      title: "iPhone 13 Pro",
-      category: "Electronics",
-      description: "Blue iPhone 13 Pro with clear case. Small crack on screen.",
-      location: "Library",
-      time: "1 day ago",
-      status: "Lost",
-      urgent: true,
-      img: "https://images.unsplash.com/photo-1580910051074-7b5e03a2a76e"
-    },
-    {
-      id: 2,
-      title: "Red Backpack",
-      category: "Bags",
-      description: "Nike backpack with laptop & notes.",
-      location: "Student Center",
-      time: "2 days ago",
-      status: "Lost",
-      urgent: false,
-      img: "https://images.unsplash.com/photo-1524492449090-1a065f2d4c88"
-    },
-    {
-      id: 3,
-      title: "Car Keys",
-      category: "Keys",
-      description: "Honda car keys with blue keychain.",
-      location: "Parking Lot",
-      time: "3 days ago",
-      status: "Lost",
-      urgent: true,
-      img: "https://images.unsplash.com/photo-1523293182086-7651a899d37f"
-    },
-    {
-      id: 4,
-      title: "Water Bottle",
-      category: "Accessories",
-      description: "Metal water bottle found near gym.",
-      location: "Gym",
-      time: "4 hours ago",
-      status: "Found",
-      urgent: false,
-      img: "https://images.unsplash.com/photo-1602143407151-7114b5f3f5cf"
-    }
-  ];
+    // Mock data for demonstration
+    const mockItems = {
+      lost: [
+        {
+          id: 1,
+          name: 'iPhone 14 Pro',
+          category: 'Electronics',
+          description: 'Black iPhone 14 Pro with cracked screen protector',
+          location: 'Library 2nd Floor',
+          date: '2024-01-15',
+          time: '14:30',
+          image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=400',
+          urgent: true,
+          reporter: 'John Doe'
+        },
+        {
+          id: 2,
+          name: 'Blue Backpack',
+          category: 'Bags',
+          description: 'Navy blue Jansport backpack with laptop inside',
+          location: 'Cafeteria',
+          date: '2024-01-14',
+          time: '12:15',
+          image: 'https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=400',
+          urgent: false,
+          reporter: 'Jane Smith'
+        },
+        {
+          id: 3,
+          name: 'Car Keys',
+          category: 'Keys',
+          description: 'Toyota car keys with blue keychain',
+          location: 'Parking Lot B',
+          date: '2024-01-13',
+          time: '16:45',
+          image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400',
+          urgent: true,
+          reporter: 'Mike Johnson'
+        }
+      ],
+      found: [
+        {
+          id: 4,
+          name: 'Wallet',
+          category: 'Personal',
+          description: 'Brown leather wallet with ID cards',
+          location: 'Student Center',
+          date: '2024-01-16',
+          time: '10:20',
+          image: 'https://images.unsplash.com/photo-1627123424574-724758594e93?w=400',
+          urgent: false,
+          reporter: 'Sarah Wilson'
+        },
+        {
+          id: 5,
+          name: 'Glasses',
+          category: 'Accessories',
+          description: 'Black-rimmed prescription glasses',
+          location: 'Lecture Hall A',
+          date: '2024-01-15',
+          time: '09:30',
+          image: 'https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=400',
+          urgent: false,
+          reporter: 'David Brown'
+        }
+      ]
+    };
 
-  const filteredItems =
-    activeTab === "All"
-      ? items
-      : items.filter((i) => i.status === activeTab);
+    useEffect(() => {
+      const items = mockItems[activeTab] || [];
+      const filtered = items.filter(item =>
+        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.location.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+      setFilteredItems(filtered);
+    }, [activeTab, searchQuery]);
 
-  return (
-    <div className="dashboard">
-      {/* Sidebar */}
-      <aside className="sidebar">
-        <h2 className="logo">🎒 CampusHub</h2>
-        <ul>
-          <li className={activeTab === "Lost" ? "active" : ""} onClick={() => setActiveTab("Lost")}>Lost Items</li>
-          <li className={activeTab === "Found" ? "active" : ""} onClick={() => setActiveTab("Found")}>Found Items</li>
-          <li className={activeTab === "All" ? "active" : ""} onClick={() => setActiveTab("All")}>All Items</li>
-        </ul>
-      </aside>
+    const handleItemClick = (item) => {
+      navigate(`/item/${item.id}`, { state: { item } });
+    };
 
-      {/* Main Content */}
-      <main className="main">
-        <header className="topbar">
-          <h1>{activeTab} Items</h1>
-          <button className="report-btn">+ Report Item</button>
-        </header>
-
-        <div className="cards">
-          {filteredItems.map((item) => (
-            <div key={item.id} className={`card ${item.urgent ? "urgent" : ""}`}>
-              <div className="img-box">
-                <img src={item.img} alt={item.title} />
-                {item.urgent && <span className="badge urgent-badge">Urgent</span>}
-                <span className="badge status">{item.status}</span>
-              </div>
-              <div className="content">
-                <h3>{item.title}</h3>
-                <p className="category">{item.category}</p>
-                <p className="desc">{item.description}</p>
-                <p className="meta">📍 {item.location}</p>
-                <p className="meta">⏱ Lost: {item.time}</p>
+    return (
+      <div className="dashboard-container">
+        <Sidebar />
+        
+        <div className="main-content">
+          {/* Navbar */}
+          <div className="navbar">
+            <div className="navbar-left">
+              <h1 className="page-title">Dashboard</h1>
+              
+              {/* Animated Toggle */}
+              <div className="toggle-container">
+                <div className={`toggle-slider ${activeTab}`}></div>
+                <button
+                  className={`toggle-btn ${activeTab === 'lost' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('lost')}
+                >
+                  Lost Items
+                </button>
+                <button
+                  className={`toggle-btn ${activeTab === 'found' ? 'active' : ''}`}
+                  onClick={() => setActiveTab('found')}
+                >
+                  Found Items
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-      </main>
-    </div>
-  );
-};
 
-export default Dashboard;
+            <div className="navbar-right">
+              {/* Search Bar */}
+              <div className="search-container">
+                <input
+                  type="text"
+                  placeholder="Search items..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="search-input"
+                />
+                <button className="filter-btn">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                    <path d="M3 4h18v2l-7 7v6l-4-2v-4l-7-7V4z" stroke="currentColor" strokeWidth="2"/>
+                  </svg>
+                </button>
+              </div>
+
+              {/* Action Button */}
+              <button
+                className="action-btn glow"
+                onClick={() => setShowModal(true)}
+              >
+                <span className="btn-icon">+</span>
+                Report {activeTab === 'lost' ? 'Lost' : 'Found'} Item
+              </button>
+            </div>
+          </div>
+
+          {/* Cards Grid */}
+          <div className="cards-section">
+            <div className="cards-grid">
+              {filteredItems.map(item => (
+                <ItemCard
+                  key={item.id}
+                  item={item}
+                  onClick={() => handleItemClick(item)}
+                />
+              ))}
+            </div>
+
+            {filteredItems.length === 0 && (
+              <div className="empty-state">
+                <div className="empty-icon">📦</div>
+                <h3>No {activeTab} items found</h3>
+                <p>Be the first to report a {activeTab} item!</p>
+              </div>
+            )}
+          </div>
+
+          {/* Bottom Report Button */}
+          <div className="bottom-action">
+            <button
+              className="bottom-report-btn"
+              onClick={() => setShowModal(true)}
+            >
+              <span className="btn-gradient">
+                Report Another {activeTab === 'lost' ? 'Lost' : 'Found'} Item
+              </span>
+            </button>
+          </div>
+        </div>
+
+        {/* Report Modal */}
+        {showModal && (
+          <ReportModal
+            type={activeTab}
+            onClose={() => setShowModal(false)}
+          />
+        )}
+      </div>
+    );
+  };
+
+  export default Dashboard;
