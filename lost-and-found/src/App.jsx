@@ -7,6 +7,7 @@ import Hero from './Components/Hero'
 import { Routes , Route } from 'react-router-dom'
 import Home from './Pages/Home'
 import AuthForm from './Pages/AuthForm'
+import Dashboard from './Pages/Dashboard'
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
     <Routes>
       <Route path = '/' element = {<Home/>}></Route>
       <Route path = '/auth' element = {<AuthForm />}></Route>
+      <Route path='/Dashboard' element = {<Dashboard />}></Route>
     </Routes>
      
     </>

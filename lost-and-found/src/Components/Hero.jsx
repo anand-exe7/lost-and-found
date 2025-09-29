@@ -164,7 +164,7 @@ const Hero = () => {
 
     
        
-    
+    <section id='contact-uss'>
     <div className='contact-us'> 
         <h2>Get In Touch</h2>
         <div className='contact'>
@@ -221,7 +221,7 @@ const Hero = () => {
         </div>
         
     </div>
-
+    </section>
 
      <footer class="footer">
         <div class="footer-container">

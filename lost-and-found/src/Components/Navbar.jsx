@@ -16,8 +16,8 @@ const Navbar = () => {
         <div className='nav-right'>
       
             <a className='gap'>Home</a>
-            <Link to="about" smooth={true} duration={500}>About Us</Link>
-            <a className='gap'> Contact Us</a>
+            <Link className = 'gap' to="about" smooth={true} duration={500}>About Us</Link>
+            <Link className = 'gap' to="contact-uss" smooth={true} duration={500}>Contact Us</Link>
             <div className='login'>
                <Link to="/auth">Login</Link>
             </div>
