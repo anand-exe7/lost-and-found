@@ -133,9 +133,9 @@
                   className="search-input"
                 />
                 <button className="filter-btn">
-                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                  
                     <path d="M3 4h18v2l-7 7v6l-4-2v-4l-7-7V4z" stroke="currentColor" strokeWidth="2"/>
-                  </svg>
+                  
                 </button>
               </div>
 

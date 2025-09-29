@@ -445,6 +445,7 @@
 .contact-form-container {
             background: #ffffff;
             padding: 2rem;
+            max-width: 100%;
             width: 400px;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);;
@@ -459,14 +460,14 @@
             text-align: center;
         }
 
-        .form-group {
+        .form-group1 {
             margin-bottom: 1.5rem;
         }
 
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 85%;
+        .form-group1 input,
+        .form-group1 select,
+        .form-group1 textarea {
+            width: 90%;
             padding: 1rem;
             border: 2px solid #e0e0e0;
             border-radius: 10px;
@@ -476,15 +477,15 @@
             transition: all 0.3s ease;
         }
 
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
+        .form-group1 input:focus,
+        .form-group1 select:focus,
+        .form-group1 textarea:focus {
             outline: none;
             border-color: #007bff;
             box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
         }
 
-        .form-group textarea {
+        .form-group1 textarea {
             resize: vertical;
             min-height: 120px;
         }

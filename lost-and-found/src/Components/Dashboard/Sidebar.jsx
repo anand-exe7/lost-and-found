@@ -2,6 +2,26 @@ import React, { useState } from 'react';
 
 const Sidebar = () => {
   const [activeItem, setActiveItem] = useState('dashboard');
+    const [user, setUser] = useState({ name: "Anand Sivaram" });
+
+   const getInitials = (name) => {
+    if (!name) return "";
+    const parts = name.split(" ");
+    let initials = parts[0].charAt(0).toUpperCase();
+    if (parts.length > 1) {
+      initials += parts[1].charAt(0).toUpperCase();
+    }
+    return initials;
+  };
+
+  // Simulated login function
+  const handleLogin = () => {
+    // After successful login, set the user's name dynamically
+    const loggedInUser = {
+      name: "Jane Doe"
+    };
+    setUser(loggedInUser);
+  };
 
   const menuItems = [
     { id: 'dashboard', label: 'Dashboard', icon: '🏠' },
@@ -16,7 +36,7 @@ const Sidebar = () => {
       <div className="sidebar-content">
         {/* Logo */}
         <div className="sidebar-logo">
-          <div className="logo-icon">🔍</div>
+          <div className="logo-icon"></div>
           <h2 className="logo-text">Lost & Found</h2>
         </div>
 
@@ -41,22 +61,20 @@ const Sidebar = () => {
         {/* Bottom Section */}
         <div className="sidebar-bottom">
           <div className="user-profile">
-            <img
-              src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=40&h=40&fit=crop&crop=face"
-              alt="Profile"
-              className="profile-avatar"
-            />
+            
+            
             <div className="profile-info">
-              <p className="profile-name">John Doe</p>
-              <p className="profile-role">Student</p>
+              <div className="avatar">{getInitials(user.name)}</div>
+
+              <p className="profile-name">Anand Sivaram</p>
             </div>
-          </div>
+            <p className="profile-role">Student</p>
+          </div>            
+            
+
           
           <div className="bottom-actions">
-            <button className="sidebar-btn profile-btn">
-              <span className="btn-icon">👤</span>
-              Profile
-            </button>
+            
             <button className="sidebar-btn logout-btn">
               <span className="btn-icon">🚪</span>
               Logout

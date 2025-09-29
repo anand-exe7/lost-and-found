@@ -195,14 +195,14 @@ const Hero = () => {
 
             <div class="contact-form-container">
                     <form class="contact-form">
-                        <h3>Send us a Message</h3>
-                        <div class="form-group">
+                        <h3>Send us a Message </h3>
+                        <div class="form-group1">
                             <input type="text" placeholder="Your Name" required></input>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group1">
                             <input type="email" placeholder="Your College Email" required></input>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group1">
                             <select required>
                                 <option value="">Select Topic</option>
                                 <option value="support">Technical Support</option>
@@ -211,7 +211,7 @@ const Hero = () => {
                                 <option value="other">Other</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group1">
                             <textarea rows="5" placeholder="Your Message" required></textarea>
                         </div>
                         <button type="submit" class="btn-primary">Send Message</button>
