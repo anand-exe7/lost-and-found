@@ -2,7 +2,7 @@ import React from 'react'
 import './Navbar.css'
 
 import { Link } from 'react-scroll'
-import Hero from './Hero'
+import Hero from './Hero.jsx'
 
 const Navbar = () => {
   return (
