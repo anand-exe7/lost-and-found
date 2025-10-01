@@ -140,7 +140,7 @@ const ReportModal = ({ type, onClose }) => {
           </div>
 
           <div className="form-group">
-            <label htmlFor="image">Upload Image</label>
+            <label htmlFor="image">Upload Image *</label>
             <div className="image-upload">
               <input
                 type="file"

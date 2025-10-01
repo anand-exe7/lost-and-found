@@ -94,21 +94,6 @@ const ItemDetail = () => {
         </button>
         
         <div className="social-actions">
-          <button
-            className={`social-btn ${liked ? 'liked' : ''}`}
-            onClick={() => setLiked(!liked)}
-          >
-            ❤️ {liked ? 'Liked' : 'Like'}
-          </button>
-          <button className="social-btn">
-            📢 Share
-          </button>
-          <button
-            className={`social-btn ${saved ? 'saved' : ''}`}
-            onClick={() => setSaved(!saved)}
-          >
-            🔖 {saved ? 'Saved' : 'Save'}
-          </button>
         </div>
       </div>
 
@@ -178,13 +163,7 @@ const ItemDetail = () => {
               <span className="btn-icon">💬</span>
               Contact Owner
             </button>
-            <button
-              className="action-btn boost"
-              onClick={() => setShowBoostModal(true)}
-            >
-              <span className="btn-icon">🚀</span>
-              Boost Visibility
-            </button>
+          
           </div>
         </div>
       </div>
@@ -241,21 +220,7 @@ const ItemDetail = () => {
         </div>
       </div>
 
-      {/* Activity Timeline */}
-      <div className="activity-timeline">
-        <h3 className="timeline-title">Activity Timeline</h3>
-        <div className="timeline-container">
-          {activityTimeline.map((activity, index) => (
-            <div key={index} className="timeline-item">
-              <div className="timeline-icon">{activity.icon}</div>
-              <div className="timeline-content">
-                <p className="timeline-action">{activity.action}</p>
-                <p className="timeline-meta">by {activity.user} • {activity.time}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+    
 
       {/* Modals */}
       {showFoundModal && (
@@ -292,24 +257,7 @@ const ItemDetail = () => {
         </div>
       )}
 
-      {showBoostModal && (
-        <div className="modal-overlay" onClick={() => setShowBoostModal(false)}>
-          <div className="modal-content" onClick={e => e.stopPropagation()}>
-            <h3>Boost Visibility</h3>
-            <p>This will highlight this item on the dashboard for 24 hours to increase visibility.</p>
-            <div className="boost-options">
-              <div className="boost-option">
-                <span className="boost-icon">⭐</span>
-                <span>Standard Boost (24h)</span>
-              </div>
-            </div>
-            <div className="modal-actions">
-              <button onClick={() => setShowBoostModal(false)}>Cancel</button>
-              <button className="boost-btn">Boost Now</button>
-            </div>
-          </div>
-        </div>
-      )}
+      
     </div>
   );
 };
