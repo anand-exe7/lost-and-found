@@ -1,66 +1,42 @@
-require("dotenv").config()
-const express = require("express");
-const mongoose = require("mongoose");
-const cors = require("cors");
+import express from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import mongoose from "mongoose";
+import authRoutes from "./routes/auth.js";
+import itemRoutes from "./routes/items.js";
 
+dotenv.config();
 
 const app = express();
-app.use(cors());
+
+// Middleware
+app.use(cors({
+  origin: "http://localhost:5173", // frontend URL
+  credentials: true
+}));
 app.use(express.json());
 
-// ✅ Connect to MongoDB
-const dbstring = process.env.DBSTRING;
-mongoose.connect(dbstring)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.log("❌ MongoDB Error:", err));
+// Connect to MongoDB
+mongoose.connect(process.env.MONGO_URI)
+  .then(() => console.log("✅ MongoDB connected"))
+  .catch(err => console.log("❌ MongoDB connection error:", err));
 
-// Schema: Lost Item
-const lostSchema = new mongoose.Schema({
-  itemName: String,
-  description: String,
-  location: String,
-  date: Date,
-  email: String,
-  status: { type: String, default: "open" }
+// --- Main Routes ---
+// All requests to /api/auth/* will be handled by authRoutes
+app.use("/api/auth", authRoutes);
+
+// All requests to /api/items/* will be handled by itemRoutes
+app.use("/api/items", itemRoutes);
+
+
+// --- REMOVED THE CONFLICTING ROUTES THAT WERE HERE ---
+
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ msg: "Server error", error: err.message });
 });
 
-const Lost = mongoose.model("Lost", lostSchema);
-
-// Schema: Found Item
-const foundSchema = new mongoose.Schema({
-  itemName: String,
-  description: String,
-  location: String,
-  date: Date,
-  image: String,
-  matchedLostId: { type: mongoose.Schema.Types.ObjectId, ref: "Lost" },
-  status: { type: String, default: "new" }
-});
-
-const Found = mongoose.model("Found", foundSchema);
-
-// Routes
-app.post("/lost", async (req, res) => {
-  const lostItem = new Lost(req.body);
-  await lostItem.save();
-  res.json({ message: "Lost item reported", lostItem });
-});
-
-app.post("/found", async (req, res) => {
-  const foundItem = new Found(req.body);
-  await foundItem.save();
-  res.json({ message: "Found item reported", foundItem });
-});
-
-app.get("/lost", async (req, res) => {
-  const items = await Lost.find();
-  res.json(items);
-});
-
-app.get("/found", async (req, res) => {
-  const items = await Found.find();
-  res.json(items);
-});
-
-// Start Server
-app.listen(5000, () => console.log("🚀 Server running on http://localhost:5000"));
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));

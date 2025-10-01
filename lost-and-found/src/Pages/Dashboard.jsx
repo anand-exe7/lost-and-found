@@ -4,6 +4,8 @@
   import ItemCard from '../Components/Dashboard/ItemCard';
   import ReportModal from '../Components/Dashboard/ReportModal';
   import './Dashboard.css';
+  import { getItems } from "../api";
+
 
   const Dashboard = () => {
     const [activeTab, setActiveTab] = useState('lost');
@@ -80,19 +82,31 @@
       ]
     };
 
-    useEffect(() => {
-      const items = mockItems[activeTab] || [];
-      const filtered = items.filter(item =>
-        item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.category.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        item.location.toLowerCase().includes(searchQuery.toLowerCase())
-      );
-      setFilteredItems(filtered);
-    }, [activeTab, searchQuery]);
+ useEffect(() => {
+  const fetchItems = async () => {
+    const data = await getItems(activeTab);
+    setFilteredItems(
+      data.filter(
+        item =>
+          item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.category?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          item.location?.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  };
+
+  fetchItems();
+
+  const handleNewItem = () => fetchItems();
+  window.addEventListener("itemAdded", handleNewItem);
+
+  return () => window.removeEventListener("itemAdded", handleNewItem);
+}, [activeTab, searchQuery]);
+
 
     const handleItemClick = (item) => {
-      navigate(`/item/${item.id}`, { state: { item } });
-    };
+    navigate(`/item/${item._id}`, { state: { item } }); // use backend _id
+  };
 
     return (
       <div className="dashboard-container">
@@ -154,12 +168,12 @@
           <div className="cards-section">
             <div className="cards-grid">
               {filteredItems.map(item => (
-                <ItemCard
-                  key={item.id}
-                  item={item}
-                  onClick={() => handleItemClick(item)}
-                />
-              ))}
+  <ItemCard
+    key={item._id}
+    item={item}
+    onClick={() => handleItemClick(item)}
+  />
+))}
             </div>
 
             {filteredItems.length === 0 && (
