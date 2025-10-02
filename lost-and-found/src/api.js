@@ -1,13 +1,13 @@
+
 import axios from 'axios';
 
-// Ensure this is the correct URL for your backend server
 const API_URL = 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_URL,
 });
 
-// Add a request interceptor to include the token in headers
+// Request interceptor to add token
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('token');
   if (token) {
@@ -18,30 +18,101 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
+// Response interceptor for error handling
+api.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response?.status === 401) {
+      // Token expired or invalid
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      window.location.href = '/auth';
+    }
+    return Promise.reject(error);
+  }
+);
 
-// --- FIX IS HERE ---
-// This function now correctly fetches items by type (e.g., 'lost' or 'found')
-export const getItems = (type) => {
-  // We use the '/items' endpoint and pass 'type' as a query parameter.
-  // Axios will correctly format the URL to /items?type=lost
-  return api.get('/items', { params: { type } });
+// Fetch items by type (lost or found)
+export const getItems = async (type) => {
+  try {
+    const response = await api.get('/items', { params: { type } });
+    // Ensure we always return an array
+    return Array.isArray(response.data) ? response.data : [];
+  } catch (error) {
+    console.error('Error fetching items:', error);
+    // Return empty array on error instead of throwing
+    return [];
+  }
 };
 
-// This function adds a new item
-export const addItem = (itemData) => {
-  // Note: For file uploads, you'd need to use FormData.
-  // This example assumes JSON data.
-  return api.post('/items', itemData);
+// Add a new item (supports FormData for file uploads)
+export const addItem = async (itemData) => {
+  try {
+    const response = await api.post('/items', itemData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding item:', error);
+    throw error;
+  }
 };
 
-// Example login function (you likely have this already)
-export const login = (credentials) => {
-  return api.post('/auth/login', credentials);
+// Get single item by ID
+export const getItemById = async (id) => {
+  try {
+    const response = await api.get(`/items/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching item:', error);
+    throw error;
+  }
 };
 
-// Example signup function
-export const signup = (userData) => {
-    return api.post('/auth/signup', userData);
+// Mark item as found
+export const markItemAsFound = async (id) => {
+  try {
+    const response = await api.post(`/items/found/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error marking item as found:', error);
+    throw error;
+  }
+};
+
+// Delete item
+export const deleteItem = async (id) => {
+  try {
+    const response = await api.delete(`/items/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting item:', error);
+    throw error;
+  }
+};
+
+// Login
+export const login = async (credentials) => {
+  try {
+    const response = await api.post('/auth/login', credentials);
+    return response;
+  } catch (error) {
+    console.error('Login error:', error);
+    throw error;
+  }
+};
+
+// Signup
+export const signup = async (userData) => {
+  try {
+    const response = await api.post('/auth/signup', userData);
+    return response;
+  } catch (error) {
+    console.error('Signup error:', error);
+    throw error;
+  }
 };
 
 export default api;

@@ -51,14 +51,22 @@ const AuthForm = () => {
     e.preventDefault();
     if (!validateLogin()) return;
     setLoading(true);
+    setErrors({});
+    
     try {
-      const { data } = await login(loginData);
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      const response = await login(loginData);
+      const { token, user } = response.data;
+      
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      
       navigate('/dashboard');
     } catch (error) {
       console.error('Login failed:', error);
-      setErrors({ form: 'Invalid credentials. Please try again.' });
+      const errorMsg = error.response?.data?.msg || 
+                       error.response?.data?.errors?.[0]?.msg || 
+                       'Invalid credentials. Please try again.';
+      setErrors({ form: errorMsg });
     } finally {
       setLoading(false);
     }
@@ -68,18 +76,26 @@ const AuthForm = () => {
     e.preventDefault();
     if (!validateSignup()) return;
     setLoading(true);
+    setErrors({});
+    
     try {
-      const { data } = await signup({
+      const response = await signup({
         name: signupData.name,
         email: signupData.email,
         password: signupData.password,
       });
-      localStorage.setItem('token', data.token);
-      localStorage.setItem('user', JSON.stringify(data.user));
+      const { token, user } = response.data;
+      
+      localStorage.setItem('token', token);
+      localStorage.setItem('user', JSON.stringify(user));
+      
       navigate('/dashboard');
     } catch (error) {
       console.error('Signup failed:', error);
-      setErrors({ form: 'Could not create account. The email might already be in use.' });
+      const errorMsg = error.response?.data?.msg || 
+                       error.response?.data?.errors?.[0]?.msg || 
+                       'Could not create account. The email might already be in use.';
+      setErrors({ form: errorMsg });
     } finally {
       setLoading(false);
     }
@@ -122,7 +138,11 @@ const AuthForm = () => {
               <p className="form-subtitle">Sign in to your account</p>
               
               <form onSubmit={handleLogin}>
-                {errors.form && <div className="error-message" style={{textAlign: 'center', opacity: 1, marginBottom: '1rem'}}>{errors.form}</div>}
+                {errors.form && !isSignUp && (
+                  <div className="error-message" style={{textAlign: 'center', opacity: 1, marginBottom: '1rem'}}>
+                    {errors.form}
+                  </div>
+                )}
                 <div className="form-group">
                   <label className="form-label" htmlFor="login-email">Email</label>
                   <input
@@ -130,6 +150,7 @@ const AuthForm = () => {
                     value={loginData.email} onChange={handleInputChange(setLoginData)}
                     className={`form-input ${errors.email ? 'error' : ''}`}
                     placeholder="Enter your email"
+                    disabled={loading}
                   />
                   {errors.email && <div className="error-message">{errors.email}</div>}
                 </div>
@@ -141,12 +162,13 @@ const AuthForm = () => {
                     value={loginData.password} onChange={handleInputChange(setLoginData)}
                     className={`form-input ${errors.password ? 'error' : ''}`}
                     placeholder="Enter your password"
+                    disabled={loading}
                   />
                   {errors.password && <div className="error-message">{errors.password}</div>}
                 </div>
 
                 <button type="submit" className={`submit-btn ${loading ? 'loading' : ''}`} disabled={loading}>
-                  {loading ? '' : 'Sign In'}
+                  {loading ? 'Signing In...' : 'Sign In'}
                 </button>
 
                 <div className="forgot-password">
@@ -161,7 +183,11 @@ const AuthForm = () => {
               <p className="form-subtitle">Join us today</p>
               
               <form onSubmit={handleSignup}>
-                {errors.form && <div className="error-message" style={{textAlign: 'center', opacity: 1, marginBottom: '1rem'}}>{errors.form}</div>}
+                {errors.form && isSignUp && (
+                  <div className="error-message" style={{textAlign: 'center', opacity: 1, marginBottom: '1rem'}}>
+                    {errors.form}
+                  </div>
+                )}
                 <div className="form-group">
                   <label className="form-label" htmlFor="signup-name">Full Name</label>
                   <input
@@ -169,6 +195,7 @@ const AuthForm = () => {
                     value={signupData.name} onChange={handleInputChange(setSignupData)}
                     className={`form-input ${errors.name ? 'error' : ''}`}
                     placeholder="Enter your full name"
+                    disabled={loading}
                   />
                   {errors.name && <div className="error-message">{errors.name}</div>}
                 </div>
@@ -180,6 +207,7 @@ const AuthForm = () => {
                     value={signupData.email} onChange={handleInputChange(setSignupData)}
                     className={`form-input ${errors.email ? 'error' : ''}`}
                     placeholder="Enter your email"
+                    disabled={loading}
                   />
                   {errors.email && <div className="error-message">{errors.email}</div>}
                 </div>
@@ -191,6 +219,7 @@ const AuthForm = () => {
                     value={signupData.password} onChange={handleInputChange(setSignupData)}
                     className={`form-input ${errors.password ? 'error' : ''}`}
                     placeholder="Create a password"
+                    disabled={loading}
                   />
                   {errors.password && <div className="error-message">{errors.password}</div>}
                 </div>
@@ -202,12 +231,13 @@ const AuthForm = () => {
                     value={signupData.confirmPassword} onChange={handleInputChange(setSignupData)}
                     className={`form-input ${errors.confirmPassword ? 'error' : ''}`}
                     placeholder="Confirm your password"
+                    disabled={loading}
                   />
                   {errors.confirmPassword && <div className="error-message">{errors.confirmPassword}</div>}
                 </div>
 
                 <button type="submit" className={`submit-btn ${loading ? 'loading' : ''}`} disabled={loading}>
-                  {loading ? '' : 'Create Account'}
+                  {loading ? 'Creating Account...' : 'Create Account'}
                 </button>
               </form>
             </div>

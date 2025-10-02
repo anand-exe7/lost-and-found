@@ -6,4 +6,5 @@ const UserSchema = new mongoose.Schema({
   password: { type: String, required: true }
 }, { timestamps: true });
 
-export default mongoose.model("User", UserSchema);
+// Prevent model overwrite error during hot reloads
+export default mongoose.models.User || mongoose.model("User", UserSchema);

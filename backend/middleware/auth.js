@@ -1,14 +1,23 @@
-import jwt from "jsonwebtoken";
+import jwt from 'jsonwebtoken';
 
-export default function auth(req, res, next) {
-  const token = req.headers["x-auth-token"] || req.headers.authorization?.split(" ")[1];
-  if (!token) return res.status(401).json({ msg: "No token, authorization denied" });
+const auth = (req, res, next) => {
+  // Get token from header
+  const authHeader = req.header('Authorization');
 
+  // Check if not token
+  if (!authHeader) {
+    return res.status(401).json({ msg: 'No token, authorization denied' });
+  }
+
+  // Verify token
   try {
+    const token = authHeader.split(' ')[1]; // "Bearer TOKEN"
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.userId = decoded.id;
+    req.userId = decoded.id; // Add user id to request object
     next();
   } catch (err) {
-    return res.status(401).json({ msg: "Token is not valid" });
+    res.status(401).json({ msg: 'Token is not valid' });
   }
-}
+};
+
+export default auth;
