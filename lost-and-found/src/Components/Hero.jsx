@@ -4,7 +4,7 @@ import book from "../assets/book.png"
 import phone from "../assets/phone.png"
 import headphones from "../assets/headphones.png"
 import school_bag from "../assets/school-bag.png"
-
+import { Element } from 'react-scroll'
 
 const Hero = () => {
 
@@ -43,7 +43,7 @@ const Hero = () => {
       </div>
     </div>
 
-   <section id='about'>
+   <Element id='about'>
 
     <div className='works'>
        <p className='workp'>How It Works</p>
@@ -85,10 +85,10 @@ const Hero = () => {
         </div>
 
       </div>
-      </section>
+      </Element>
 
 
-        <section class="reviews" >
+        <Element class="reviews" >
         <div class="reviews-container">
             <h2 class="section-title">What Students Say</h2>
             <div class="reviews-grid">
@@ -160,11 +160,11 @@ const Hero = () => {
                 </div>
             </div>
         </div>
-    </section>
+    </Element>
 
     
        
-    <section id='contact-uss'>
+    <Element id='contact-uss'>
     <div className='contact-us'> 
         <h2>Get In Touch</h2>
         <div className='contact'>
@@ -173,7 +173,7 @@ const Hero = () => {
             <p>We're here to help make your campus experience better. Reach out to us for support, partnerships, or just to share your feedback.</p>
 
             <div className='box1'>
-                <img src={phone}></img>
+               
                 <div className='box-img'>
                     <h2>Email Support</h2>
                     <p>support@srmrmp.edu</p>
@@ -183,7 +183,7 @@ const Hero = () => {
             </div>
 
              <div className='box2'>
-                <img src=''></img>
+               
                 <div className='box2-img'>
                     <h2>Lost and Found</h2>
                     <p>Admin Building, Room 101</p>
@@ -221,7 +221,7 @@ const Hero = () => {
         </div>
         
     </div>
-    </section>
+    </Element>
 
      <footer class="footer">
         <div class="footer-container">

@@ -351,6 +351,48 @@
   font-size: 2.4rem;
 }
 
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+
+.card1,
+.card2,
+.card3,
+.card4,
+.card5,
+.card6 {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0; /* Start invisible */
+}
+
+.card1,
+.card2,
+.card3,
+.card4,
+.card5,
+.card6 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card1:hover,
+.card2:hover,
+.card3:hover,
+.card4:hover,
+.card5:hover,
+.card6:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+}
+
+
  .reviews {
     padding: 10px;
     background: #ffffff;
@@ -366,11 +408,16 @@
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 30px;
     margin-top: 2rem;
+    
+    
 }
 
 .section-title{
-  padding: 60px;
+  font-size: 2.4rem;
+  font-weight: 600;
+  align-items: center;
   text-align: center;
+  padding: 120px;
 }
 
 .review-card {
@@ -507,13 +554,13 @@
           display: flex;
           flex-direction: column;
           justify-content: center;
-          gap: 40px;
+          gap: 60px;
           
           
         }
 
         .contact-sec p{
-          width:580px;
+          width:980px;
           
         }
 
@@ -534,6 +581,7 @@
           display: flex;
           flex-direction: row;
           align-items: flex-start;
+          text-align: center;
           border: 10px;
           background-color: #f8f9fa;
           border-radius: 20px;
@@ -565,6 +613,7 @@
           display: flex;
           flex-direction: row;
           align-items: flex-start;
+          text-align: center;
           border: 10px;
           background-color: #f8f9fa;
           border-radius: 20px;

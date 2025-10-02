@@ -110,15 +110,18 @@ const Sidebar = () => {
 
           {/* Bottom Section */}
           <div className="sidebar-bottom">
-            <div className="user-profile">
+            <div className="user-profile enhanced-profile">
               <div className="profile-info">
-                <div className="avatar">{getInitials(user.name)}</div>
-                <div>
-                  <p className="profile-name">{user.name || 'User'}</p>
-                  <p className="profile-role">Student</p>
-                </div>
+                <div className="avatar-bounce">
+                  <div className="avatar">{getInitials(user.name)}</div>
               </div>
+               <div className="profile-text">
+                 <p className="profile-name">{user.name || 'User'}</p>
+                 <p className="profile-role">Student</p>
+               </div>
+             </div>
             </div>
+
 
             <div className="bottom-actions">
               <button className="sidebar-btn logout-btn" onClick={handleLogout}>

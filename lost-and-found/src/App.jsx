@@ -4,7 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Navbar from './Components/Navbar.jsx'
 import Hero from './Components/Hero.jsx'
-import { Routes , Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Pages/Home.jsx'
 import AuthForm from './Pages/AuthForm.jsx'
 import Dashboard from './Pages/Dashboard.jsx'

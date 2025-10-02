@@ -23,6 +23,7 @@
   padding: 1rem;
   position: relative;
   overflow: hidden;
+  background: #272023;
 }
 
 
@@ -46,7 +47,7 @@ background: radial-gradient(circle at 20% 50%, hsla(316, 70%, 68%, 0.3) 0%, tran
 
 .auth-toggle {
   display: flex;
-  background: hsl(var(--secondary));
+  background: black;
   border-radius: calc(var(--radius) - 2px);
   padding: 0.25rem;
   margin-bottom: 2rem;
@@ -125,23 +126,26 @@ background: radial-gradient(circle at 20% 50%, hsla(316, 70%, 68%, 0.3) 0%, tran
 
 .form-subtitle {
   text-align: center;
-  color: hsl(var(--muted-foreground));
+  color: ivory;
   margin-bottom: 2rem;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+  width: 100%;
 }
 
 .form-label {
   display: block;
   font-weight: 500;
   margin-bottom: 0.5rem;
-  color: aliceblue;
+ color: rgb(255, 241, 241) !important;
+  
 }
 
 .form-input {
   width: 90%;
+  max-width:  370px;
   padding: 0.75rem 1rem;
   background: hsl(var(--input));
   border: 1px solid hsl(var(--border));
@@ -174,6 +178,7 @@ background: radial-gradient(circle at 20% 50%, hsla(316, 70%, 68%, 0.3) 0%, tran
 .submit-btn {
   width: 100%;
   padding: 0.875rem 1rem;
+  
   background: var(--gradient-primary);
   border: none;
   border-radius: calc(var(--radius) - 2px);
