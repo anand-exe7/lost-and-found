@@ -7,6 +7,7 @@ import { fileURLToPath } from 'url';
 import authRoutes from "./routes/auth.js";
 import itemRoutes from "./routes/items.js";
 import notificationRoutes from "./routes/notifications.js";
+import claimRoutes from "./routes/claims.js";
 import commentRoutes from "./routes/comments.js";
 
 dotenv.config();
@@ -18,7 +19,7 @@ const app = express();
 
 // Middleware
 app.use(cors({
-  origin: "http://localhost:5173", // frontend URL
+  origin: "http://localhost:5173",
   credentials: true
 }));
 app.use(express.json());
@@ -35,7 +36,7 @@ mongoose.connect(process.env.MONGO_URI)
     process.exit(1);
   });
 
-// Prevent mongoose model overwrite errors
+// Mongoose connection events
 mongoose.connection.on('connected', () => {
   console.log('📡 Mongoose connected to MongoDB');
 });
@@ -51,6 +52,9 @@ mongoose.connection.on('disconnected', () => {
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/items", itemRoutes);
+app.use("/api/notifications", notificationRoutes);
+app.use("/api/claims", claimRoutes);
+app.use("/api/comments", commentRoutes);
 
 // Health check route
 app.get("/", (req, res) => {

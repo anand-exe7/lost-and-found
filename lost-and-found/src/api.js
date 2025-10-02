@@ -22,7 +22,6 @@ api.interceptors.response.use(
   (response) => response,
   (error) => {
     if (error.response?.status === 401) {
-      // Token expired or invalid
       localStorage.removeItem('token');
       localStorage.removeItem('user');
       window.location.href = '/auth';
@@ -31,20 +30,17 @@ api.interceptors.response.use(
   }
 );
 
-// Fetch items by type (lost or found)
+// ============= ITEMS =============
 export const getItems = async (type) => {
   try {
     const response = await api.get('/items', { params: { type } });
-    // Ensure we always return an array
     return Array.isArray(response.data) ? response.data : [];
   } catch (error) {
     console.error('Error fetching items:', error);
-    // Return empty array on error instead of throwing
     return [];
   }
 };
 
-// Add a new item (supports FormData for file uploads)
 export const addItem = async (itemData) => {
   try {
     const response = await api.post('/items', itemData, {
@@ -59,7 +55,6 @@ export const addItem = async (itemData) => {
   }
 };
 
-// Get single item by ID
 export const getItemById = async (id) => {
   try {
     const response = await api.get(`/items/${id}`);
@@ -70,7 +65,6 @@ export const getItemById = async (id) => {
   }
 };
 
-// Mark item as found
 export const markItemAsFound = async (id) => {
   try {
     const response = await api.post(`/items/found/${id}`);
@@ -81,7 +75,6 @@ export const markItemAsFound = async (id) => {
   }
 };
 
-// Delete item
 export const deleteItem = async (id) => {
   try {
     const response = await api.delete(`/items/${id}`);
@@ -92,7 +85,7 @@ export const deleteItem = async (id) => {
   }
 };
 
-// Login
+// ============= AUTH =============
 export const login = async (credentials) => {
   try {
     const response = await api.post('/auth/login', credentials);
@@ -103,7 +96,6 @@ export const login = async (credentials) => {
   }
 };
 
-// Signup
 export const signup = async (userData) => {
   try {
     const response = await api.post('/auth/signup', userData);
@@ -114,51 +106,71 @@ export const signup = async (userData) => {
   }
 };
 
-export default api;
-
-// ========== NOTIFICATION APIs ==========
-
-// Get all notifications for current user
+// ============= NOTIFICATIONS =============
 export const getNotifications = async () => {
   try {
     const response = await api.get('/notifications');
     return response.data;
   } catch (error) {
     console.error('Error fetching notifications:', error);
-    throw error;
+    return [];
   }
 };
 
-// Get unread notification count
 export const getUnreadCount = async () => {
   try {
     const response = await api.get('/notifications/unread-count');
-    return response.data;
+    return response.data.count;
   } catch (error) {
     console.error('Error fetching unread count:', error);
-    return { count: 0 };
+    return 0;
   }
 };
 
-// Create a found claim
-export const createClaim = async (itemId, foundLocation, message) => {
+export const markNotificationAsRead = async (id) => {
   try {
-    const response = await api.post('/notifications/claim', {
-      itemId,
-      foundLocation,
-      message
-    });
+    const response = await api.put(`/notifications/${id}/read`);
     return response.data;
   } catch (error) {
-    console.error('Error creating claim:', error);
+    console.error('Error marking notification as read:', error);
     throw error;
   }
 };
 
-// Approve a claim
-export const approveClaim = async (notificationId) => {
+export const markAllNotificationsAsRead = async () => {
   try {
-    const response = await api.put(`/notifications/${notificationId}/approve`);
+    const response = await api.put('/notifications/mark-all-read');
+    return response.data;
+  } catch (error) {
+    console.error('Error marking all notifications as read:', error);
+    throw error;
+  }
+};
+
+export const deleteNotification = async (id) => {
+  try {
+    const response = await api.delete(`/notifications/${id}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting notification:', error);
+    throw error;
+  }
+};
+
+// ============= CLAIMS =============
+export const submitClaim = async (claimData) => {
+  try {
+    const response = await api.post('/claims', claimData);
+    return response.data;
+  } catch (error) {
+    console.error('Error submitting claim:', error);
+    throw error;
+  }
+};
+
+export const approveClaim = async (claimId) => {
+  try {
+    const response = await api.put(`/claims/${claimId}/approve`);
     return response.data;
   } catch (error) {
     console.error('Error approving claim:', error);
@@ -166,10 +178,9 @@ export const approveClaim = async (notificationId) => {
   }
 };
 
-// Reject a claim
-export const rejectClaim = async (notificationId) => {
+export const rejectClaim = async (claimId) => {
   try {
-    const response = await api.put(`/notifications/${notificationId}/reject`);
+    const response = await api.put(`/claims/${claimId}/reject`);
     return response.data;
   } catch (error) {
     console.error('Error rejecting claim:', error);
@@ -177,34 +188,20 @@ export const rejectClaim = async (notificationId) => {
   }
 };
 
-// Mark notification as read
-export const markAsRead = async (notificationId) => {
+export const getClaimForItem = async (itemId) => {
   try {
-    const response = await api.put(`/notifications/${notificationId}/read`);
+    const response = await api.get(`/claims/item/${itemId}`);
     return response.data;
   } catch (error) {
-    console.error('Error marking as read:', error);
-    throw error;
+    console.error('Error fetching claim:', error);
+    return null;
   }
 };
 
-// Mark all notifications as read
-export const markAllAsRead = async () => {
-  try {
-    const response = await api.put('/notifications/mark-all-read');
-    return response.data;
-  } catch (error) {
-    console.error('Error marking all as read:', error);
-    throw error;
-  }
-};
-
-// ========== COMMENT APIs ==========
-
-// Get comments for an item
+// ============= COMMENTS =============
 export const getComments = async (itemId) => {
   try {
-    const response = await api.get(`/comments/${itemId}`);
+    const response = await api.get(`/comments/item/${itemId}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching comments:', error);
@@ -212,14 +209,9 @@ export const getComments = async (itemId) => {
   }
 };
 
-// Add a comment
-export const addComment = async (itemId, text, parentCommentId = null) => {
+export const addComment = async (commentData) => {
   try {
-    const response = await api.post('/comments', {
-      itemId,
-      text,
-      parentCommentId
-    });
+    const response = await api.post('/comments', commentData);
     return response.data;
   } catch (error) {
     console.error('Error adding comment:', error);
@@ -227,7 +219,6 @@ export const addComment = async (itemId, text, parentCommentId = null) => {
   }
 };
 
-// Delete a comment
 export const deleteComment = async (commentId) => {
   try {
     const response = await api.delete(`/comments/${commentId}`);
@@ -237,3 +228,5 @@ export const deleteComment = async (commentId) => {
     throw error;
   }
 };
+
+export default api;
