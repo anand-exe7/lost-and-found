@@ -6,6 +6,8 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import authRoutes from "./routes/auth.js";
 import itemRoutes from "./routes/items.js";
+import notificationRoutes from "./routes/notifications.js";
+import commentRoutes from "./routes/comments.js";
 
 dotenv.config();
 

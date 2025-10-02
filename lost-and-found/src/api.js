@@ -1,4 +1,3 @@
-
 import axios from 'axios';
 
 const API_URL = 'http://localhost:5000/api';
@@ -116,3 +115,125 @@ export const signup = async (userData) => {
 };
 
 export default api;
+
+// ========== NOTIFICATION APIs ==========
+
+// Get all notifications for current user
+export const getNotifications = async () => {
+  try {
+    const response = await api.get('/notifications');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching notifications:', error);
+    throw error;
+  }
+};
+
+// Get unread notification count
+export const getUnreadCount = async () => {
+  try {
+    const response = await api.get('/notifications/unread-count');
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching unread count:', error);
+    return { count: 0 };
+  }
+};
+
+// Create a found claim
+export const createClaim = async (itemId, foundLocation, message) => {
+  try {
+    const response = await api.post('/notifications/claim', {
+      itemId,
+      foundLocation,
+      message
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error creating claim:', error);
+    throw error;
+  }
+};
+
+// Approve a claim
+export const approveClaim = async (notificationId) => {
+  try {
+    const response = await api.put(`/notifications/${notificationId}/approve`);
+    return response.data;
+  } catch (error) {
+    console.error('Error approving claim:', error);
+    throw error;
+  }
+};
+
+// Reject a claim
+export const rejectClaim = async (notificationId) => {
+  try {
+    const response = await api.put(`/notifications/${notificationId}/reject`);
+    return response.data;
+  } catch (error) {
+    console.error('Error rejecting claim:', error);
+    throw error;
+  }
+};
+
+// Mark notification as read
+export const markAsRead = async (notificationId) => {
+  try {
+    const response = await api.put(`/notifications/${notificationId}/read`);
+    return response.data;
+  } catch (error) {
+    console.error('Error marking as read:', error);
+    throw error;
+  }
+};
+
+// Mark all notifications as read
+export const markAllAsRead = async () => {
+  try {
+    const response = await api.put('/notifications/mark-all-read');
+    return response.data;
+  } catch (error) {
+    console.error('Error marking all as read:', error);
+    throw error;
+  }
+};
+
+// ========== COMMENT APIs ==========
+
+// Get comments for an item
+export const getComments = async (itemId) => {
+  try {
+    const response = await api.get(`/comments/${itemId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching comments:', error);
+    return [];
+  }
+};
+
+// Add a comment
+export const addComment = async (itemId, text, parentCommentId = null) => {
+  try {
+    const response = await api.post('/comments', {
+      itemId,
+      text,
+      parentCommentId
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    throw error;
+  }
+};
+
+// Delete a comment
+export const deleteComment = async (commentId) => {
+  try {
+    const response = await api.delete(`/comments/${commentId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting comment:', error);
+    throw error;
+  }
+};
