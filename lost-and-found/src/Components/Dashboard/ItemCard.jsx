@@ -40,11 +40,7 @@ const ItemCard = ({ item, onClick }) => {
         
         <div className="card-footer">
           <div className="reporter-info">
-            <img
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=30&h=30&fit=crop&crop=face"
-              alt={item.reporter}
-              className="reporter-avatar-small"
-            />
+          
             <span className="reporter-name">by {item.reporter}</span>
           </div>
           
@@ -52,12 +48,8 @@ const ItemCard = ({ item, onClick }) => {
             <button className="card-action-btn">
               💬
             </button>
-            <button className="card-action-btn">
-              ❤️
-            </button>
-            <button className="card-action-btn">
-              📢
-            </button>
+           
+            
           </div>
         </div>
       </div>

@@ -60,7 +60,7 @@ const Sidebar = () => {
     { id: 'dashboard', label: 'Dashboard', icon: '🏠' },
     { id: 'lost', label: 'Lost Items', icon: '🔍' },
     { id: 'found', label: 'Found Items', icon: '✅' },
-    { id: 'reports', label: 'My Reports', icon: '📋' },
+  
   ];
 
   return (
